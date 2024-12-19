@@ -2,78 +2,84 @@ let randomNumber = null;
 let timer;
 let interval;
 let selectedResponse = null;
-let score = 5;
-let remainingNumbers = [];
 
-const submitButtonElement = document.getElementById("submit-button");
 const gameDivisonElement = document.getElementById("game-divison");
 const startDivisonElement = document.getElementById("start-divison");
+const startButtonElement = document.getElementById("start-button");
+const submitButtonElement = document.getElementById("submit-button");
 const restartDivisonElement = document.getElementById("restart-divison");
+const restartButtonElement = document.getElementById("restart-button");
 const generatedNumberElement = document.getElementById("generated-number");
-const rightGuessMemeElement = document.getElementById("right-guess-meme");
-const wrongGuessMemeElement = document.getElementById("wrong-guess-meme");
 
-document
-  .getElementById("start-button")
-  .addEventListener("click", startGame, startTimer);
+const timerDisplayElement = document.getElementById("timer-display");
+const messageElement = document.getElementById("message");
 
-document
-  .getElementById("restart-button")
-  .addEventListener("click", restartGame);
+const imageButtons = document.querySelectorAll(".image-button");
 
-document.getElementById("submit-button").addEventListener("click", submitGuess);
+const timeupModalElement = document.getElementById("timeup-modal");
+const startOverButtonElement = document.getElementById("start-over");
+const endGameButtonElement = document.getElementById("end-game");
+
+startButtonElement.addEventListener("click", startGame);
+submitButtonElement.addEventListener("click", submitGuess);
+
+restartButtonElement.addEventListener("click", restartGame);
+startOverButtonElement.addEventListener("click", restartGame);
+
+document.addEventListener("DOMContentLoaded", () => {
+  const imageButtons = document.querySelectorAll(".image-button");
+  const submitButton = document.getElementById("submit-button");
+  imageButtons.forEach((button) => (button.disabled = true));
+  submitButton.disabled = true;
+});
+
+function restartGame() {
+  resetGame();
+  startGame();
+}
 
 function startGame() {
-  gameDivisonElement.style.display = "block";
   startDivisonElement.style.display = "none";
+  startButtonElement.disabled = true;
+  resetGame();
   startTimer();
-  //score = 5;
-  //remainingNumbers = Array.from({ length: 6 }, (_, i) => i + 1);
-  //rangeDisplay.textContent = remainingNumbers.length;
   genrateRandomNumber();
 }
 
-const startButtonElement = document.getElementById("start-button");
-const timerDisplayElement = document.getElementById("timer-display");
-
 function startTimer() {
-  let timeLeft = 10;
-  timerDisplayElement.textContent = `You have ${timeLeft} seconds left`;
+  let timeLeft = 5;
+  timerDisplayElement.textContent = `Time left : ${timeLeft}`;
 
   interval = setInterval(() => {
     timeLeft -= 1;
-    timerDisplayElement.textContent = `You have ${timeLeft} seconds left`;
+    timerDisplayElement.textContent = `Time left : ${timeLeft}`;
 
-    if (timeLeft == 0) {
-      clearInterval(interval);
-      document.getElementById("restart-button").click();
-      alert("Time's Up!");
+    if (timeLeft <= 0) {
+      timeupPopup();
+      resetTimer();
     }
   }, 1000);
 }
 
-function stopTimer() {
+function timeupPopup() {
+  timeupModalElement.classList.remove("hidden");
+}
+
+function resetTimer() {
   clearInterval(interval);
 }
 
 function genrateRandomNumber() {
   randomNumber = Math.floor(Math.random() * 6) + 1;
-  document.getElementById("generated-number").textContent =
-    "Winning number was :" + randomNumber;
-
-  //console.log(randomNumber);
 }
-
-const imageButtons = document.querySelectorAll(".image-button");
 
 imageButtons.forEach((startButtonElement) => {
   startButtonElement.addEventListener("click", () => {
     imageButtons.forEach((btn) => btn.classList.remove("selected"));
-
     startButtonElement.classList.add("selected");
     selectedResponse = startButtonElement.getAttribute("data-value");
     submitButtonState();
-    //console.log("Selected Response:", selectedResponse);
+    console.log("Selected Response:", selectedResponse);
   });
 });
 
@@ -84,24 +90,43 @@ function submitButtonState() {
     submitButtonElement.disabled = false;
   }
 }
-console.log(selectedResponse);
 
 function submitGuess() {
   submitButtonElement.disabled = true;
-  gameDivisonElement.style.display = "none";
+
+  imageButtons.forEach((btn) => (btn.disabled = true));
+
   restartDivisonElement.style.display = "block";
   generatedNumberElement.style.display = "block";
 
   if (parseInt(selectedResponse) === randomNumber) {
-    document.getElementById("message").textContent =
-      "Congrats! You guessed it right.";
+    messageElement.textContent = "Congrats! You guessed it right.";
     generatedNumberElement.style.display = "none";
-    rightGuessMemeElement.style.display = "block";
+    // rightGuessMemeElement.style.display = "block";
   } else {
-    document.getElementById("message").textContent = "Better luck Next time";
-    wrongGuessMemeElement.style.display = "block";
+    messageElement.innerHTML = `Better luck Next time! <br> Winning number was : ${randomNumber}`;
+    //  wrongGuessMemeElement.style.display = "block";
   }
-  stopTimer();
+  resetTimer();
 }
 
-function restartGame() {}
+function resetGame() {
+  resetTimer();
+  randomNumber = null;
+  imageButtons.forEach((btn) => btn.classList.remove("selected"));
+  timeupModalElement.classList.add("hidden");
+  restartDivisonElement.style.display = "none";
+  imageButtons.forEach((btn) => (btn.disabled = false));
+  startButtonElement.display = "none";
+  messageElement.textContent = "";
+  generatedNumberElement.textContent = "";
+}
+
+/* function startOverGame() {
+  resetGame();
+} */
+
+function endGame() {
+  timeupModalElement.classList.add("hidden");
+  console.log(hi);
+}

@@ -3,67 +3,74 @@
   <head>
     <title>Play the Game</title>
     <link rel="stylesheet" href="dice-game.css" />
+    <script defer src="dice.js"></script>
   </head>
   <body>
-    <div>
-      <div id="start-divison">
-        <h3>Start the Game</h3>
-        <button id="start-button" title="Click to start the game">Start</button>
-      </div>
-
-      <div id="game-divison">
-        <!-- <input
-                id="userInput"
-                type="number"
-                placeholder="Enter your guess 1-6"
-                min="1"
-                max="6"
-              />
-            -->
-        <div>
-          <h3>Select your guess</h3>
-
-          <button class="image-button" data-value="1">
-            <img src="images/Dice - 1.png" alt="one" />
-          </button>
-          <button class="image-button" data-value="2">
-            <img src="images/Dice - 2.png" alt="two" />
-          </button>
-          <button class="image-button" data-value="3">
-            <img src="images/Dice - 3.png" alt="three" />
-          </button>
-          <button class="image-button" data-value="4">
-            <img src="images/Dice - 4.png" alt="four" />
-          </button>
-          <button class="image-button" data-value="5">
-            <img src="images/Dice - 5.png" alt="five" />
-          </button>
-          <button class="image-button" data-value="6">
-            <img src="images/Dice - 6.png" alt="six" />
+    <div class="game-container">
+      <div class="main-game">
+        <div id="start-divison">
+          <h3>Start the Game</h3>
+          <button id="start-button" title="Click to start the game">
+            Start
           </button>
         </div>
-        <div><button id="submit-button" disabled>Submit</button></div>
-        <h1 id="timer-display"></h1>
-      </div>
 
-      <p id="message"></p>
-      <p id="guessed-number"></p>
-      <p id="generated-number"></p>
-      <p id="score"></p>
-      <div id="right-guess-meme">
+        <div id="game-divison">
+          <div>
+            <h3>Select your guess</h3>
+
+            <button class="image-button" data-value="1">
+              <img src="images/Dice - 1.png" alt="one" />
+            </button>
+            <button class="image-button" data-value="2">
+              <img src="images/Dice - 2.png" alt="two" />
+            </button>
+            <button class="image-button" data-value="3">
+              <img src="images/Dice - 3.png" alt="three" />
+            </button>
+            <button class="image-button" data-value="4">
+              <img src="images/Dice - 4.png" alt="four" />
+            </button>
+            <button class="image-button" data-value="5">
+              <img src="images/Dice - 5.png" alt="five" />
+            </button>
+            <button class="image-button" data-value="6">
+              <img src="images/Dice - 6.png" alt="six" />
+            </button>
+          </div>
+          <div><button id="submit-button" disabled>Submit</button></div>
+          <h3 id="timer-display"></h3>
+        </div>
+
+        <p id="message"></p>
+        <p id="guessed-number"></p>
+        <p id="generated-number"></p>
+        <p id="score"></p>
+        <!-- <div id="right-guess-meme">
         <img src="images/right-guess-image.jpg" id="right-guess-image" />
       </div>
       <div id="wrong-guess-meme">
         <img src="images/wrong-guess-image.jpg" id="wrong-guess-image" />
-      </div>
+      </div> -->
 
-      <div id="restart-divison">
-        <button
-          id="restart-button"
-          onclick="window.location.href='dice-game.html';"
-        >
-          Restart Game
-        </button>
+        <div id="restart-divison">
+          <button id="restart-button">Restart Game</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="timeup-modal" class="modal hidden">
+      <div class="modal-content">
+        <p>You ran out of time. What would you like to do?</p>
+        <div class="timeup-buttons">
+          <button id="start-over">Restart Game</button>
+          <button
+            id="end-game"
+            onclick="window.location.href='http://127.0.0.1:5500/dice-home.html';"
+          >
+            End Game
+          </button>
+        </div>
       </div>
     </div>
 

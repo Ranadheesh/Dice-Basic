@@ -5,44 +5,47 @@
     <link rel="stylesheet" href="dice-home.css" />
   </head>
   <body>
-    <div class="main">
-      <h1>Game Instructions for Users</h1>
-      <h2>Start the Game:</h2>
-      <ul>
-        <li>
-          Click the Start button to begin. A random number between 1 and 6 will
-          be generated behind the scenes.
-        </li>
-        <li>Guess the Number: You have 5 seconds to guess the number.</li>
-        <li>Enter your guess in the input field and submit.</li>
-      </ul>
+    <div class="home-container">
+      <div class="main-home">
+        <h1>Game Instructions for Users</h1>
+        <h2>Start the Game:</h2>
+        <ul>
+          <li>
+            Click the Start button to begin. A random number between 1 and 6
+            will be generated behind the scenes.
+          </li>
+          <li>Guess the Number: You have 5 seconds to guess the number.</li>
+          <li>Enter your guess in the input field and submit.</li>
+        </ul>
 
-      <h2>Scoring Rules:</h2>
-      <ul>
-        <li>First Try: Guess the correct number to earn 5 points.</li>
-        <li>
-          Subsequent Tries: If you guess wrong: A new number will be generated
-          from the remaining numbers.
-        </li>
-        <li>
-          Correct guesses will earn decreasing points: 4 points, 3 points, and
-          so on.
-        </li>
-        <li>
-          Game End: The game ends when only one number is left. A Restart button
-          will appear to reset the game.
-        </li>
-      </ul>
+        <h2>Scoring Rules:</h2>
+        <ul>
+          <li>First Try: Guess the correct number to earn 5 points.</li>
+          <li>
+            Subsequent Tries: If you guess wrong: A new number will be generated
+            from the remaining numbers.
+          </li>
+          <li>
+            Correct guesses will earn decreasing points: 4 points, 3 points, and
+            so on.
+          </li>
+          <li>
+            Game End: The game ends when only one number is left. A Restart
+            button will appear to reset the game.
+          </li>
+        </ul>
+        <div id="enter-button-divison">
+          <button
+            id="enter"
+            class="enterButton"
+            title="Click to enter the game"
+            onclick="window.location.href='dice-game.html';"
+          >
+            Enter the Game
+          </button>
+        </div>
+      </div>
     </div>
-
-    <button
-      id="enter"
-      class="enterButton"
-      title="Click to enter the game"
-      onclick="window.location.href='dice-game.html';"
-    >
-      Enter the Game
-    </button>
     <script src="dice.js"></script>
   </body>
 </html>
