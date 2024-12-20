@@ -18,7 +18,8 @@ const imageButtons = document.querySelectorAll(".image-button");
 
 const timeupModalElement = document.getElementById("timeup-modal");
 const startOverButtonElement = document.getElementById("start-over");
-const endGameButtonElement = document.getElementById("end-game");
+const endGamePopupButtonElement = document.getElementById("end-button-popup");
+/* const endGameButtonElement = document.getElementById("end-button"); */
 
 startButtonElement.addEventListener("click", startGame);
 submitButtonElement.addEventListener("click", submitGuess);
@@ -97,6 +98,7 @@ function submitGuess() {
   imageButtons.forEach((btn) => (btn.disabled = true));
 
   restartDivisonElement.style.display = "block";
+
   generatedNumberElement.style.display = "block";
 
   if (parseInt(selectedResponse) === randomNumber) {
